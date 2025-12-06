@@ -5,9 +5,9 @@ public class Map {
     private final int height;
     private final Tile[][] grid;
 
-    public Map(int width, int height) {
-        this.width = width;
+    public Map(int height, int width) {
         this.height = height;
+        this.width = width;
         this.grid = new Tile[height][width];
         fillmap();
     }
@@ -26,10 +26,18 @@ public class Map {
         }
     }
 
+    public Tile getTile(int row, int col) {
+        if (row >= 0 && row < height && col >= 0 && col < width) {
+            return grid[row][col];
+        } else {
+            throw new IndexOutOfBoundsException("Invalid tile coordinates: (" + row + "," + col + ")");
+        }
+    }
+
     public void displayMap() {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                System.out.print(grid[row][col].getType() + " ");
+                System.out.print(grid[row][col].toString());
             }
             System.out.println();
         }

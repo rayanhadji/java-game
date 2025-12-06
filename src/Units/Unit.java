@@ -1,46 +1,32 @@
 package Units;
 
+import Enemies.Enemy;
+
 public abstract class Unit {
-    protected int health;
     protected int attack;
-    protected int defense;
-    protected int Range;
+    protected int range;
+    protected int cooldown;
     protected int cost;
 
-    public Unit(int health, int attack, int defense, int Range, int cost) {
-        this.health = health;
+    public Unit(int attack, int range, int cooldown, int cost) {
         this.attack = attack;
-        this.defense = defense;
-        this.Range = Range;
+        this.range = range;
+        this.cooldown = cooldown;
         this.cost = cost;
     }
 
-    public abstract void move(int x, int y);
-    public abstract void attack(Unit target);
+    public abstract void attack(Enemy target);
 
-    public boolean isAlive() {
-        return health > 0;
-    }
-
-    public void takeDamage(int damage) {
-        health -= damage;
-        if (health < 0) health = 0;
-    }
-
-    public int getHealth() {
-        return health;
-    }
     public int getAttack() {
         return attack;
     }
-    public int getDefense() {
-        return defense;
+    public int getCooldown() {
+        return cooldown;
     }
     public int getRange() {
-        return Range;
+        return range;
     }
     public int getCost() {
         return cost;
     }
 }
-
