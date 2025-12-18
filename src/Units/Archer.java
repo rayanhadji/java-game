@@ -4,7 +4,7 @@ import Enemies.Enemy;
 
 public class Archer extends Unit {
     public Archer() {
-        super(80, 5, 3, 75);
+        super(80, 25, 5, 3, 60);
     }
 
     @Override

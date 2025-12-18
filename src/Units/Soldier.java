@@ -4,7 +4,7 @@ import Enemies.Enemy;
 
 public class Soldier extends Unit {
     public Soldier() {
-        super(100, 1, 2, 50);
+        super(100, 20, 10, 1, 50);
     }
 
     @Override
