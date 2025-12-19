@@ -8,10 +8,12 @@ public class Archer extends Unit {
         super("Archer", 25, 15, 3, 5, 2, createCost());
     }
 
-    private static Map<String, Integer> createCost() {
-        Map<String, Integer> cost = new HashMap<>();
-        cost.put("Food", 15);
-        cost.put("Gold", 7);
-        return cost;
+    @Override
+    public void attack(Enemy target) {
+        int dealt = target.takeDamage(5);
+        System.out.println("Archer attacked for " + dealt + " damage.");
+    }
+public int targethp() {
+        return target.health;
     }
 }
