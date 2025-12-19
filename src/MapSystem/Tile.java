@@ -1,4 +1,4 @@
-package Map;
+package MapSystem;
 import Units.Unit;
 
 public class Tile {

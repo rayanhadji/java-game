@@ -1,5 +1,5 @@
-package Main;
-import Map.Map;
+import Core.GameManager;
+import MapSystem.Map;
 import Units.Soldier;
 
 public class Main {

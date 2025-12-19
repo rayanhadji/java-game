@@ -1,4 +1,4 @@
-package Map;
+package MapSystem;
 
 public class Map {
     private final int width;
