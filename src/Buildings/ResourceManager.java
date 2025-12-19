@@ -32,4 +32,9 @@ public class ResourceManager {
     public void showResources() {
         System.out.println("Resources: " + resources);
     }
+
+    // Get current resources
+    public Map<String, Integer> getResources() {
+        return resources;
+    }
 }

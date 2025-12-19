@@ -12,8 +12,8 @@ public class Mine extends Building {
     }
 
     @Override
-    public void function(ResourceManager ResourceManager) {
+    public void function(ResourceManager resourceManager) {
         System.out.println("Mine produced " + production + " Stone.");
-        ResourceManager.addResource("Stone", production);
+        resourceManager.addResource("Stone", production);
     }
 }

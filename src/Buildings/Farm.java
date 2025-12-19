@@ -12,8 +12,8 @@ public class Farm extends Building {
     }
 
     @Override
-    public void function(ResourceManager ResourceManager) {
+    public void function(ResourceManager resourceManager) {
         System.out.println("Farm produced " + production + " Food.");
-        ResourceManager.addResource("Food", production);
+        resourceManager.addResource("Food", production);
     }
 }

@@ -1,43 +1,40 @@
 package Units;
-import Enemies.Enemy;
+
+import java.util.Map;
 
 public abstract class Unit {
+    protected String name;
     protected int health;
-    protected int defense;
     protected int attack;
+    protected int defense;
     protected int range;
-    protected int cost;
+    protected int speed;
+    protected Map<String, Integer> cost;
 
-    public Unit(int health,int attack,int defense, int range, int cost) {
+    public Unit(String name, int health, int attack, int defense, int range, int speed, Map<String, Integer> cost) {
+        this.name = name;
         this.health = health;
-        this.defense = defense;
         this.attack = attack;
+        this.defense = defense;
         this.range = range;
+        this.speed = speed;
         this.cost = cost;
     }
 
-    public abstract void attack(Enemy target);
+    public String getName() { return name; }
+    public int getHealth() { return health; }
+    public int getAttack() { return attack; }
+    public int getDefense() { return defense; }
+    public int getRange() { return range; }
+    public int getSpeed() { return speed; }
+    public Map<String, Integer> getCost() { return cost; }
 
-    public abstract void move(int newRow, int newCol);
-
-    
-    public int getHealth() {
-        return health;
+    public void takeDamage(int damage) {
+        health -= damage;
+        if (health < 0) health = 0;
     }
 
-    public int getDefense() {
-        return defense;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public int getRange() {
-        return range;
-    }
-
-    public int getCost() {
-        return cost;
+    public boolean isAlive() {
+        return health > 0;
     }
 }

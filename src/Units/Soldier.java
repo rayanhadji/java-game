@@ -1,19 +1,17 @@
 package Units;
 
-import Enemies.Enemy;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Soldier extends Unit {
-    Enemy target;
     public Soldier() {
-        super(100, 20, 10, 1, 50);
-        this.target = target;
+        super("Soldier", 30, 10, 5, 1, 2, createCost());
     }
-    @Override
-    public void attack(Enemy target) {
-        int dealt = target.takeDamage(10);
-        System.out.println("Archer attacked for " + dealt + " damage.");
-    }
-     public int targetHP() {
-        return target.health;
+
+    private static Map<String, Integer> createCost() {
+        Map<String, Integer> cost = new HashMap<>();
+        cost.put("Food", 10);
+        cost.put("Gold", 5);
+        return cost;
     }
 }

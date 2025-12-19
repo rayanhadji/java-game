@@ -12,8 +12,8 @@ public class Sawmill extends Building {
     }
 
     @Override
-    public void function(ResourceManager ResourceManager) {
+    public void function(ResourceManager resourceManager) {
         System.out.println("Sawmill produced " + production + " Wood.");
-        ResourceManager.addResource("Wood", production);
+        resourceManager.addResource("Wood", production);
     }
 }

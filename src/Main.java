@@ -1,21 +1,20 @@
-import Core.GameManager;
-import MapSystem.Map;
-import Units.Soldier;
+import Buildings.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        GameManager gm = new GameManager();
-        gm.startGame();
+        ResourceManager resourceManager = new ResourceManager();
 
-        Map map = new Map(9, 5);
-        map.displayMap();
+        // Cost to build TrainingCamp (example)
+        Map<String, Integer> campCost = new HashMap<>();
+        campCost.put("Wood", 20);
+        campCost.put("Stone", 10);
 
-        System.out.println("Placing a soldier at (2,2):");
+        TrainingCamp camp = new TrainingCamp(campCost, 2);
 
-        Soldier s1 = new Soldier();
-        map.getTile(2, 2).placeUnit(s1);
-        map.displayMap();
-
-        gm.endGame();
+        resourceManager.showResources();
+        camp.function(resourceManager); // Try to train a Soldier
+        resourceManager.showResources();
     }
 }
