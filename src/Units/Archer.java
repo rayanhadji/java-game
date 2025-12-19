@@ -12,7 +12,7 @@ public class Archer extends Unit {
 
     @Override
     public void attack(Enemy target) {
-        int dealt = target.takeDamage(5);
+        int dealt = target.takeDamage(this.attack);
         System.out.println("Archer attacked for " + dealt + " damage.");
     }
 public int targethp() {
