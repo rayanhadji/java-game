@@ -6,13 +6,18 @@ public class Map {
     private final Tile[][] grid;
 
     public Map(int height, int width) {
-        this.height = height;
-        this.width = width;
-        this.grid = new Tile[height][width];
-        fillmap();
+        try{
+            if(height > 0 && width > 0){
+                this.height = height;
+                this.width = width;
+                this.grid = new Tile[height][width];
+            }
+        } catch(IndexOutOfBoundsException e){
+            system.out.println("invalid index ");
+        }
     }
     
-    private void fillmap() {
+   public void fillmap() {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 if (col == width / 2) {
