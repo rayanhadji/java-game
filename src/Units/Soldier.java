@@ -10,7 +10,7 @@ public class Soldier extends Unit {
     }
     @Override
     public void attack(Enemy target) {
-        int dealt = target.takeDamage(10);
+        int dealt = target.takeDamage(this.attack);
         System.out.println("Archer attacked for " + dealt + " damage.");
     }
      public int targetHP() {
