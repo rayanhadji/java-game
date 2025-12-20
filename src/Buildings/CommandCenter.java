@@ -3,7 +3,7 @@ package Buildings;
 import java.util.Map;
 
 public class CommandCenter extends Building {
-    private int level;
+    private static int level;
 
     public CommandCenter(Map<String, Integer> cost, int buildTime) {
         super("Command Center", cost, buildTime);
