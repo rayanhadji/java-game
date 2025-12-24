@@ -24,7 +24,7 @@ public class MapPanel extends JPanel {
         return map != null ? mapHeightReflection() : 0;
     }
 
-    // لأن width و height private
+
     private int mapWidthReflection() {
         try {
             var f = Map.class.getDeclaredField("width");
