@@ -1,20 +1,16 @@
-import Buildings.*;
-import java.util.HashMap;
-import java.util.Map;
+import Core.GameManager;
 
 public class Main {
     public static void main(String[] args) {
-        ResourceManager resourceManager = new ResourceManager();
+        GameManager game = new GameManager();
 
-        // Cost to build TrainingCamp (example)
-        Map<String, Integer> campCost = new HashMap<>();
-        campCost.put("Wood", 20);
-        campCost.put("Stone", 10);
-
-        TrainingCamp camp = new TrainingCamp(campCost, 2);
-
-        resourceManager.showResources();
-        camp.function(resourceManager); // Try to train a Soldier
-        resourceManager.showResources();
+        int turns = 5; // play 5 turns for demo
+        for (int i = 0; i < turns; i++) {
+            game.playTurn();
+            if (game.isGameOver()) {
+                System.out.println("Game Over! The base has fallen.");
+                break;
+            }
+        }
     }
 }

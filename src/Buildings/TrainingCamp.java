@@ -1,8 +1,9 @@
 package Buildings;
 
-import java.util.Map;
+import Core.Player;
 import Units.Soldier;
 import Units.Unit;
+import java.util.Map; // import Player
 
 public class TrainingCamp extends Building {
 
@@ -10,14 +11,21 @@ public class TrainingCamp extends Building {
         super("Training Camp", cost, buildTime);
     }
 
+    // Required by Building (abstract method)
     @Override
     public void function(ResourceManager resourceManager) {
+        // Keep this for compatibility
+        System.out.println("Training Camp requires a Player reference to train units.");
+    }
+
+    // Overloaded method: actually trains units and adds them to Player
+    public void function(ResourceManager resourceManager, Player player) {
         Unit unit = new Soldier();
 
         if (canAfford(unit, resourceManager)) {
             payCost(unit, resourceManager);
+            player.addUnit(unit); // <-- add to army
             System.out.println("Training Camp trained a " + unit.getName() + "!");
-            // Later: add to Player army
         } else {
             System.out.println("Not enough resources to train " + unit.getName());
         }

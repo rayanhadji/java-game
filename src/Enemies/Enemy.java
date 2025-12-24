@@ -1,44 +1,37 @@
 package Enemies;
 
-import Units.Unit;
+import java.util.Map;
 
 public abstract class Enemy {
+    protected String name;
     protected int health;
+    protected int attack;
     protected int defense;
     protected int speed;
+    protected Map<String, Integer> reward; // resources given when killed
 
-    public Enemy(int health, int defense, int speed) {
+    public Enemy(String name, int health, int attack, int defense, int speed, Map<String, Integer> reward) {
+        this.name = name;
         this.health = health;
+        this.attack = attack;
         this.defense = defense;
         this.speed = speed;
+        this.reward = reward;
     }
 
-    public abstract void move(int newRow, int newCol);
-    public abstract void attack(Unit target);
+    public String getName() { return name; }
+    public int getHealth() { return health; }
+    public int getAttack() { return attack; }
+    public int getDefense() { return defense; }
+    public int getSpeed() { return speed; }
+    public Map<String, Integer> getReward() { return reward; }
+
+    public void takeDamage(int damage) {
+        health -= damage;
+        if (health < 0) health = 0;
+    }
 
     public boolean isAlive() {
         return health > 0;
-    }
-
-    public int takeDamage(int damage) {
-        int effectiveDamage = damage - defense;
-        if (effectiveDamage <= 0) {
-            effectiveDamage = 1;
-        }
-        health -= effectiveDamage;
-        if (health < 0) health = 0;
-        return effectiveDamage;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public int getSpeed() {
-        return speed;
     }
 }

@@ -13,7 +13,7 @@ public class Map {
                 this.grid = new Tile[height][width];
             }
         } catch(IndexOutOfBoundsException e){
-            system.out.println("invalid index ");
+            System.out.println("invalid index ");
         }
     }
     

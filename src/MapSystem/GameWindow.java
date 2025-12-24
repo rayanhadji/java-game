@@ -1,6 +1,6 @@
+package MapSystem;
+
 import javax.swing.*;
-import MapSystem.Map;
-import MapSystem.MapPanel;
 
 public class GameWindow {
 
