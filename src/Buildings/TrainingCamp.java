@@ -1,53 +1,78 @@
 package Buildings;
 
-import Core.Player;
+import Units.Archer;
+import Units.Cavalry;
 import Units.Soldier;
 import Units.Unit;
-import java.util.Map; // import Player
 
+import java.util.Map;
+import java.util.Scanner;
+
+/**
+ * TrainingCamp trains new units for the player.
+ * - Costs resources to train.
+ * - Can train Soldier, Archer, or Cavalry.
+ * - Returns the trained Unit so GameManager can place it on the map.
+ */
 public class TrainingCamp extends Building {
+    private final int trainingTime;
 
-    public TrainingCamp(Map<String, Integer> cost, int buildTime) {
-        super("Training Camp", cost, buildTime);
+    public TrainingCamp(Map<String, Integer> cost, int trainingTime) {
+        super("Training Camp", cost, trainingTime); // FIX: add name to match Building constructor
+        this.trainingTime = trainingTime;
     }
 
-    // Required by Building (abstract method)
-    @Override
-    public void function(ResourceManager resourceManager) {
-        // Keep this for compatibility
-        System.out.println("Training Camp requires a Player reference to train units.");
-    }
+    /**
+     * Ask the player which unit to train, check resources, and return the new Unit.
+     */
+    public Unit trainUnit(ResourceManager resources) {
+        Scanner scanner = new Scanner(System.in);
 
-    // Overloaded method: actually trains units and adds them to Player
-    public void function(ResourceManager resourceManager, Player player) {
-        Unit unit = new Soldier();
+        System.out.println("Choose unit to train:");
+        System.out.println("1. Soldier (cost: 10 Food, 5 Gold)");
+        System.out.println("2. Archer (cost: 15 Food, 10 Gold)");
+        System.out.println("3. Cavalry (cost: 25 Food, 20 Gold)");
+        System.out.print("Enter choice: ");
 
-        if (canAfford(unit, resourceManager)) {
-            payCost(unit, resourceManager);
-            player.addUnit(unit); // <-- add to army
-            System.out.println("Training Camp trained a " + unit.getName() + "!");
-        } else {
-            System.out.println("Not enough resources to train " + unit.getName());
-        }
-    }
+        int choice = scanner.nextInt();
+        Unit newUnit = null;
 
-    private boolean canAfford(Unit unit, ResourceManager resourceManager) {
-        for (Map.Entry<String, Integer> entry : unit.getCost().entrySet()) {
-            String resource = entry.getKey();
-            int required = entry.getValue();
-            int available = resourceManager.getResources().getOrDefault(resource, 0);
-            if (available < required) {
-                return false;
+        switch (choice) {
+            case 1 -> {
+                boolean ok = resources.spendResource("Food", 10) && resources.spendResource("Gold", 5);
+                if (ok) {
+                    newUnit = new Soldier();
+                } else {
+                    System.out.println("Not enough resources for Soldier.");
+                }
             }
+            case 2 -> {
+                boolean ok = resources.spendResource("Food", 15) && resources.spendResource("Gold", 10);
+                if (ok) {
+                    newUnit = new Archer();
+                } else {
+                    System.out.println("Not enough resources for Archer.");
+                }
+            }
+            case 3 -> {
+                boolean ok = resources.spendResource("Food", 25) && resources.spendResource("Gold", 20);
+                if (ok) {
+                    newUnit = new Cavalry();
+                } else {
+                    System.out.println("Not enough resources for Cavalry.");
+                }
+            }
+            default -> System.out.println("Invalid choice.");
         }
-        return true;
+
+        if (newUnit != null) {
+            System.out.println(newUnit.getName() + " trained successfully!");
+        }
+        return newUnit;
     }
 
-    private void payCost(Unit unit, ResourceManager resourceManager) {
-        for (Map.Entry<String, Integer> entry : unit.getCost().entrySet()) {
-            String resource = entry.getKey();
-            int required = entry.getValue();
-            resourceManager.addResource(resource, -required);
-        }
+    @Override
+    public void function(ResourceManager resources) {
+        // TrainingCamp doesn’t produce resources, so nothing here.
     }
 }

@@ -1,74 +1,47 @@
 package MapSystem;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class MapPanel extends JPanel {
-
-    private final Map map;
+    private final GameMap map;   // GameMap
     private static final int TILE_SIZE = 32;
 
-    public MapPanel(Map map) {
+    public MapPanel(GameMap map) {   // constructor expects GameMap
         this.map = map;
-        setPreferredSize(new Dimension(
-                mapWidth() * TILE_SIZE,
-                mapHeight() * TILE_SIZE
-        ));
-    }
-
-    private int mapWidth() {
-        return map != null ? mapWidthReflection() : 0;
-    }
-
-    private int mapHeight() {
-        return map != null ? mapHeightReflection() : 0;
-    }
-
-
-    private int mapWidthReflection() {
-        try {
-            var f = Map.class.getDeclaredField("width");
-            f.setAccessible(true);
-            return f.getInt(map);
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    private int mapHeightReflection() {
-        try {
-            var f = Map.class.getDeclaredField("height");
-            f.setAccessible(true);
-            return f.getInt(map);
-        } catch (Exception e) {
-            return 0;
-        }
+        setPreferredSize(new Dimension(map.getWidth() * TILE_SIZE, map.getHeight() * TILE_SIZE));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (int row = 0; row < mapHeight(); row++) {
-            for (int col = 0; col < mapWidth(); col++) {
+        for (int row = 0; row < map.getHeight(); row++) {
+            for (int col = 0; col < map.getWidth(); col++) {
                 Tile tile = map.getTile(row, col);
 
+                Color color;
                 switch (tile.getType()) {
-                    case 'G' -> g.setColor(Color.GREEN);
-                    case 'W' -> g.setColor(Color.BLUE);
-                    case 'M' -> g.setColor(Color.GRAY);
-                    default -> g.setColor(Color.BLACK);
+                    case 'G' -> color = Color.GREEN;
+                    case 'W' -> color = Color.BLUE;
+                    case 'M' -> color = Color.GRAY;
+                    default -> color = Color.BLACK;
                 }
 
                 int x = col * TILE_SIZE;
                 int y = row * TILE_SIZE;
 
+                g.setColor(color);
                 g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, TILE_SIZE, TILE_SIZE);
 
                 if (tile.getUnit() != null) {
                     g.setColor(Color.RED);
+                    g.fillOval(x + 8, y + 8, 16, 16);
+                } else if (tile.getEnemy() != null) {
+                    g.setColor(Color.BLACK);
                     g.fillOval(x + 8, y + 8, 16, 16);
                 }
             }
