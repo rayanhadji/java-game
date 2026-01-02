@@ -27,6 +27,8 @@ public abstract class Enemy {
     public Map<String, Integer> getReward() { return reward; }
 
     public void takeDamage(int damage) {
+        damage -= defense;
+        if (damage < 1) damage = 1;
         health -= damage;
         if (health < 0) health = 0;
     }

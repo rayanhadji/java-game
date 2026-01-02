@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Archer extends Unit {
     public Archer() {
-        super("Archer", 25, 15, 5, 5, 2, createCost());
+        super("Archer", 30, 15, 5, 5, 2, createCost());
     }
 
     private static Map<String, Integer> createCost() {

@@ -30,6 +30,8 @@ public abstract class Unit {
     public Map<String, Integer> getCost() { return cost; }
 
     public void takeDamage(int damage) {
+        damage -= defense;
+        if (damage < 1) damage = 1;
         health -= damage;
         if (health < 0) health = 0;
     }

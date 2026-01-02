@@ -66,7 +66,6 @@ public class GameManager {
         List<Enemy> newWave = waveManager.spawnWave();
         activeEnemies.addAll(newWave);
         int laneRow = gameMap.getPlayerSpawn()[0];
-        int leftCol = gameMap.getPlayerSpawn()[1];
         int rightCol = gameMap.getEnemySpawn()[1];
 
         for (Enemy e : newWave) {
@@ -172,14 +171,6 @@ public class GameManager {
             }
         }
         return -1;
-    }
-
-    private Enemy findNearestEnemy(int laneRow, int fromCol) {
-        for (int c = fromCol + 1; c < gameMap.getWidth(); c++) {
-            Tile t = gameMap.getTile(laneRow, c);
-            if (t.getEnemy() != null) return t.getEnemy();
-        }
-        return null;
     }
 
     // Find nearest empty tile from spawn going inward

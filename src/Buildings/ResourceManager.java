@@ -8,10 +8,10 @@ public class ResourceManager {
 
     public ResourceManager() {
         resources = new HashMap<>();
-        resources.put("Gold", 250);
-        resources.put("Wood", 150);
-        resources.put("Stone", 100);
-        resources.put("Food", 200);
+        resources.put("Gold", 150);
+        resources.put("Wood", 100);
+        resources.put("Stone", 70);
+        resources.put("Food", 100);
     }
 
     // Update resources amounts

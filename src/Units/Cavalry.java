@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Cavalry extends Unit {
     public Cavalry() {
-        super("Cavalry", 50, 15, 7, 3, 5, createCost());
+        super("Cavalry", 70, 15, 7, 3, 5, createCost());
     }
 
     private static Map<String, Integer> createCost() {
